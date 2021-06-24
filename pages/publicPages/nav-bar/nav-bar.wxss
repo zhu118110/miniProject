@@ -1,0 +1,5 @@
+/* pages/publicPages/header/header.wxss */
+.gapBox{
+  display: flex;
+  align-items: center;
+}

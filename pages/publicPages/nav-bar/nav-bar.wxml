@@ -1,0 +1,12 @@
+<!--pages/publicPages/header/header.wxml-->
+<view>
+   <!-- 封装的公共的自定义头部组件, -->
+   <view class="navBox" style="height:{{ height }}px;padding-bottom:{{ statusHeights }}rpx;background-color:red">
+      <view style="height:{{ statusHeights }}px;"></view> <!-- 状态栏 -->
+      <view class="gapBox" style="height:{{ height - statusHeights }}px;">
+         <view>推荐</view>
+         <view>视频</view>
+      </view>
+
+   </view>
+</view>

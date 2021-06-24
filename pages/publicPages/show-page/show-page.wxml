@@ -1,0 +1,31 @@
+<!--pages/publicPages/show-page/show-page.wxml-->
+<view class="container">
+
+	<view class="dataArea" style="margin-top: {{ navHeight+20 }}px">
+		<block wx:for="{{ pageData }}" wx:for-index="index" wx:for-item="item" wx:key="id">
+			<view class="head">
+				<view class="headLeft">
+					<view class="headImg">
+						<image src="{{ item.headImg }}"></image>
+					</view>
+					<view class="headName">{{ item.name }}</view>
+				</view>
+				<view class="headRight" bindtap="scanCode">关注+</view>
+			</view>
+			<view class="content">
+        <view class="article">
+         <view>{{ item.article }}</view> 
+        </view>
+        <view class="imgs {{ item.imgArr.length==1 ? 'imgOne' : (item.imgArr.length==2 ? 'imgTwo' : item.imgArr.length==3 ? 'imgThree' : item.imgArr.length==4 ? 'imgFour' :'')}}">
+					<block wx:for="{{ item.imgArr }}" wx:for-index="imgsIndex" wx:for-item="imgItem" wx:key="imgsIndex">
+						<view>
+						 <image src="{{ imgItem }}"></image>
+						</view>
+					</block>
+        </view>
+			</view>
+		</block>
+
+	</view>
+
+</view>

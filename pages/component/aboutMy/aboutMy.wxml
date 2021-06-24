@@ -1,0 +1,7 @@
+<view>
+<view style="height:100px;"></view>
+
+     <canvas canvas-id="barcode"/>
+     <button bindtap="byn" style="margin-top:100px;">按钮</button>
+     {{ aa }}
+</view>

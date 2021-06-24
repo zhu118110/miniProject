@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "navBar":"../../publicPages/nav-bar/nav-bar",
+    "showPage":"../../publicPages/show-page/show-page"
+  }
+}

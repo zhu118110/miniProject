@@ -1,0 +1,7 @@
+<!--index.wxml-->
+<view class="container">
+  <navBar class="navBar"></navBar>
+  <view class="dataArea">
+    <showPage pageData="{{firstPageData}}"></showPage>
+  </view>
+</view>

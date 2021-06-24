@@ -1,0 +1,31 @@
+{
+  "pages": [
+    "pages/component/index/index",
+    "pages/component/aboutMy/aboutMy",
+    "pages/publicPages/nav-bar/nav-bar",
+    "pages/publicPages/show-page/show-page"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "微博",
+    "navigationBarTextStyle": "black",
+    "navigationStyle": "custom"
+  },
+  "tabBar": {
+    "color": "#aaa",
+    "selectedColor": "#ff4455",
+    "list": [
+      {
+        "pagePath": "pages/component/index/index",
+        "text": "主页"
+      },
+      {
+        "pagePath": "pages/component/aboutMy/aboutMy",
+        "text": "我的"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}
