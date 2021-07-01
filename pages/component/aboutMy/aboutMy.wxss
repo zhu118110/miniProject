@@ -1,1 +1,49 @@
-/* pages/aboutMy.wxss */
+  .title{
+    text-align: center;
+  }
+  .header{
+    padding:20rpx;
+    background-color: #fff;
+    display: block;
+  }
+  .isShow{
+    display: none;
+  }
+  .headerInfor{
+    display: flex;
+    justify-content: space-between;
+  }
+  .headInforLeft{
+    display: flex;
+  }
+  .headInforImg{
+    margin-right: 20rpx;
+    border-radius: 50%;
+    border:2rpx solid #ccc;
+    overflow:hidden;
+    font-size: 0;
+  }
+  
+  
+  .tabHead{
+    padding: 10rpx;
+    background-color: #fff;
+    display: flex;
+    justify-content: space-around;
+  }
+ 
+  .active{
+    border-bottom: 4rpx solid tomato;
+  }
+  .scrollArea{
+    margin-top: 20rpx;
+    background-color: #fff;
+  }
+  .swiper{
+    height:50vh;
+    height: calc( 100vh - 800rpx );
+  }
+  .scroll{
+    height: calc( 100vh - 800rpx );
+  }
+

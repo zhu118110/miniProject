@@ -1,0 +1,14 @@
+/* pages/publicPages/header/header.wxss */
+.gapBox{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+.gapLeft{
+ width: 100%;
+}
+.gapCenter{
+  margin: 0 auto;
+}

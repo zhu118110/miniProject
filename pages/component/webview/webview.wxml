@@ -1,0 +1,5 @@
+<!--pages/component/webview/webview.wxml-->
+<view>
+ <web-view src="{{ url }}">
+ </web-view>
+</view>

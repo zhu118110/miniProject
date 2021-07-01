@@ -1,0 +1,23 @@
+/* pages/publicPages/like/like.wxss */
+.likeBox{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #eee;
+}
+.tips{
+  color: #bbb;
+  font-size: 24rpx;
+}
+.login{
+  width: 100rpx;
+  font-size: 24rpx;
+  padding: 10rpx 40rpx;
+  border-radius: 60rpx;
+  border: 1rpx solid #e17808;
+  color: #e17808;
+  margin-top: 40rpx;
+}

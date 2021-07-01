@@ -1,0 +1,45 @@
+<!--pages/component/search/search.wxml-->
+<view>
+	<view>
+		<nav-bar>
+			<view slot="left" class="left" style="width:calc( 100vw - 100vw - {{ capsuleWidth - capsuleRight }}px )">
+				<view bindtap="navigateBack" class="navigateBack">
+					<mp-icon type="field" icon="back" color="black" size="{{12}}"></mp-icon>
+				</view>
+				<view class="search">
+					<input bindinput="insert" type="text" value="{{ inputVal }}" focus="true" auto-focus="true" placeholder-class="placeholder" placeholder="搜索"></input>
+					<text hidden="{{inputVal == ''}}" class="iconfont icon-qingchu my_icon" bindtap="clearValue"></text>
+				</view>
+			</view>
+		</nav-bar>
+	</view>
+	<view class="hot">
+		<view class="mainTitle">
+			<text >热搜榜</text>
+		</view>
+		<view class="listBox">
+			<scroll-view scroll-y="{{ true }}" style="height: calc(100vh - 400rpx)">
+				<block wx:if="{{ hotMode.length > 0 }}" wx:for="{{ hotMode }}" wx:key="id">
+					<view class="listItem" bindtap="choiceHotItem" data-url = "{{ item.url }}">
+						<view class="listItemLeft">
+							<view class="num {{ index <= 3 ? 'hotnum'  : '' }}">{{ index }}</view>
+							<view class="title">{{ item.title }}</view>
+						</view>
+						<view class="listItemRight {{ item.hot > 8000000  ? 'listItemRightHot' : ''}}" wx:if="{{ item.hot > 8000000  }}">
+							热
+						</view>
+						<view class="listItemRight" wx:if="{{ item.hot > 4000000 && 8000000 > item.hot}}">
+							沸
+						</view>
+					
+						<view class="listItemRight" wx:if="{{item.hot > 500000 && 4000000 > item.hot }}">
+							新
+						</view>
+						<!-- <view class="listItemRight" wx:else>荐</view> -->
+					</view>
+				</block>
+			</scroll-view>
+		</view>
+
+	</view>
+</view>

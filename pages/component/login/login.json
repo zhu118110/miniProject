@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "nav-bar":"../../publicPages/navBar/navBar"
+  },
+ 
+  "navigationBarTitleText": "登录"
+}

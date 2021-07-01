@@ -1,0 +1,92 @@
+/* pages/component/search/search.wxss */
+page{
+  background-color: #fff;
+}
+.left{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding:0 20rpx;
+  -webkit-box-sizing:border-box;
+  box-sizing: border-box;
+}
+.navigateBack{
+  flex: 1;
+}
+.search{
+  flex: 4;
+  position: relative;
+}
+.search .my_icon{
+  position: absolute;
+  font-size: 40rpx;
+  right:10rpx;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #bdbaba;
+  z-index: 100;
+}
+.search input{
+  background-color: rgb(245, 245, 245);
+  border-radius: 40rpx;
+  padding: 10rpx 40rpx;
+  /* text-align: center; */
+}
+.placeholder{
+  padding-left: 20rpx;
+  font-size: 24rpx;
+}
+
+
+.hot{
+  margin-top: 30rpx;
+}
+.mainTitle{
+  text-align: center;
+  font-weight: 600;
+}
+.mainTitle text{
+  font-size: 28rpx;
+  border-bottom: 2rpx solid rgb(211, 8, 8);
+}
+.listBox{
+  margin-top: 2px;
+}
+.listItem{
+  display: flex;
+  width: 100%;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  justify-content: space-between;
+  padding: 20rpx;
+  border-top: 1rpx solid #eee;
+  align-items: center;
+}
+.listItemLeft{
+  display: flex;
+  
+}
+.listItemLeft .num{
+  width: 70rpx;
+  text-align: center;
+  font-style: italic;
+  font-size: 24rpx;
+  color: orange;
+  font-weight: 600;
+}
+.listItemLeft .hotnum{
+  color: orangered;
+}
+.listItemLeft .title{
+  margin-left: 20rpx;
+  font-size: 28rpx;
+}
+.listItemRight{
+  font-size: 24rpx;
+  color: #fff;
+  background-color: orange;
+  padding: 0 4rpx;
+}
+.listItemRightHot{
+  background-color: orangered;
+}

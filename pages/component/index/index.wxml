@@ -1,7 +1,16 @@
 <!--index.wxml-->
 <view class="container">
-  <navBar class="navBar"></navBar>
-  <view class="dataArea">
-    <showPage pageData="{{firstPageData}}"></showPage>
+  <nav-bar class="navBar">
+    <view slot="left" class="navBarLeft" style="width:calc( 100vw - 100vw - {{ capsuleWidth - capsuleRight }}px )">
+      <view class="article {{ tabsIndex == 1 ? 'active' : '' }}" bindtap="changeTabas" data-index="1">文章</view>
+      <view class="video  {{ tabsIndex == 2 ? 'active' : '' }}" bindtap="changeTabas" data-index="2">视频</view>
+      <view class="search" bindtap="tabSearch">
+        <input type="text" placeholder-class="placeholder" placeholder="搜索"></input>
+      </view>
+    </view>
+  </nav-bar>
+  <view class="dataArea"  style="margin-top:{{ navHeight+10 }}px">
+    <mp-loading show="{{ isShow }}" type="circle" tips="加载中"></mp-loading>
+    <show-page pageData="{{firstPageData}}"></show-page>
   </view>
 </view>

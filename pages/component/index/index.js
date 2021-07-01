@@ -8,13 +8,30 @@ Page({
    * 页面的初始数据
    */
   data: {
+    navHeight:"60",
     firstPageData:[],
+    isShow:false,  //触发下拉加载时loading动画是否显示
+    isPullDown:false,  //禁止频繁下拉刷新
+    tabsIndex:1,   //控制头部tab选中状态
+    capsuleWidth:100,
+    capsuleRight:20
+  },
+  // 点击切换头部tabs选中状态
+  changeTabas(e){
+    let tabIndex = e.currentTarget.dataset.index;
+    this.setData({
+      'tabsIndex': tabIndex
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
+  // 点击搜索框时跳转到搜索页面
+  tabSearch(){
+    wx.navigateTo({
+      url: '../search/search',
+    })
+  },
+  // 刚进入页面时加载数据
+  initData(){
     http.get("/firstDataInfo",{})
     .then(res =>{
       if(res.statusCode == 200 && res.data.code == 1){
@@ -22,8 +39,6 @@ Page({
           "firstPageData":res.data.data
         })
       }
-     
-      console.log(this.data.firstPageData)
     })
     .catch(err =>{
       wx.showToast({
@@ -32,6 +47,38 @@ Page({
         duration: 2000
       })
     })
+  },
+  // 下拉获取更多数据
+  pullDownData(){
+    if(this.data.isPullDown === true){
+      return false;
+    }
+    this.setData({
+      'isShow':true,
+      'isPullDown':true
+    });
+    this.initData();
+    let _this = this;
+    setTimeout(function () {
+      _this.setData({
+        'isShow':false,
+        'isPullDown':false
+      })
+    }, 2000)
+  },
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    let rect = app.globalData.capsule;
+    console.log(rect)
+    this.setData({
+      navHeight:app.globalData.navHeight,
+      capsuleWidth:rect.capsuleWidth, //胶囊宽度
+      capsuleRight: rect.capsuleRight //胶囊与屏幕右边距离
+    });
+    console.log( this.data.capsuleWidth, this.data.capsuleRight,)
+    this.initData();
   },
 
   /**
@@ -66,7 +113,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    
+   this.pullDownData()
   },
 
   /**
@@ -76,10 +123,5 @@ Page({
     
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-    
-  }
+ 
 })

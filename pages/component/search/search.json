@@ -1,9 +1,8 @@
 {
   "usingComponents": {
-    "like":"../../publicPages/like/like",
     "nav-bar":"../../publicPages/navBar/navBar",
     "mp-icon": "weui-miniprogram/icon/icon",
-    "show-page":"../../publicPages/showPage/showPage"
+    "mp-searchbar": "weui-miniprogram/searchbar/searchbar"
   },
   "navigationStyle": "custom"
 }

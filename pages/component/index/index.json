@@ -1,6 +1,9 @@
 {
   "usingComponents": {
-    "navBar":"../../publicPages/nav-bar/nav-bar",
-    "showPage":"../../publicPages/show-page/show-page"
-  }
+    "nav-bar":"../../publicPages/navBar/navBar",
+    "show-page":"../../publicPages/showPage/showPage",
+    "mp-loading": "weui-miniprogram/loading/loading"
+  },
+  "navigationStyle": "custom",
+  "enablePullDownRefresh":true
 }

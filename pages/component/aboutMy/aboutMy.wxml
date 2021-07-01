@@ -1,7 +1,49 @@
 <view>
-<view style="height:100px;"></view>
-
-     <canvas canvas-id="barcode"/>
-     <button bindtap="byn" style="margin-top:100px;">按钮</button>
-     {{ aa }}
+  <view>
+  <nav-bar>
+      <view slot="left" class="title">登录</view>
+  </nav-bar>
+   <view class="header {{ isShow==false ?'isShow':'' }}">
+    <view class="headerInfor">
+     <!-- 左边头像 -->
+      <view class="headInforLeft">
+        <view class="headInforImg">
+         <mp-icon type="field" icon="me" color="#eee" size="{{50}}"  wx:if="{{ !userInfor.avatarUrl }}"></mp-icon>
+         <image wx:else src="{{ userInfor.avatarUrl }}" style="width:50px;height:50px"> </image>
+        </view>
+        <view>
+            <view bindtap="toLogin" wx:if="{{ !userInfor.nickName }}"> 立即登录 </view>
+            <view wx:else>{{ userInfor.nickName }}</view>
+            <view> 0关注 0粉丝</view>
+        </view>
+      </view>
+       <!-- 右边消息 -->
+      <view class="headInforRight">
+         <mp-icon type="outline" icon="email" color="#111" size="{{20}}"></mp-icon>
+         <mp-icon wx:if="{{ userInfor.nickName }}" type="outline" icon="transfer2" color="#111" size="{{20}}" bindtap="quitLogin" style="margin-left:20rpx"></mp-icon>
+      </view>
+    </view>
+  </view>
+  <view class="tabHead">
+    <view bindtap="changeTabs" class="{{ current == 0 ? 'active' :'' }}"  data-current="0">动态</view>
+    <view bindtap="changeTabs" class="{{ current == 1 ? 'active' :'' }}" data-current="1">微博</view>
+    <view bindtap="changeTabs" class="{{ current == 2 ? 'active' :'' }}" data-current="2">喜欢</view>
+  </view>
+  </view>
+  <view class="scrollArea">
+   <!-- class="swiper" -->
+    <swiper wx:if="{{pageData.length>0}}" style=" height:{{ scrollHeight }}" current="{{ current }}" bindchange="changeSwiperItem">
+     <swiper-item>
+      <scroll-view style=" height:{{ scrollHeight }}" scroll-top="{{scrollTop}}" scroll-y="{{ true }}" bindscroll="scrolling">
+        <show-page pageData="{{ pageData }}"></show-page>
+      </scroll-view>
+     </swiper-item>
+     <swiper-item>
+      <like bindmyLogin="myLogin"></like>
+     </swiper-item>
+     <swiper-item>
+      <like bindmyLogin="myLogin"></like>
+     </swiper-item>
+    </swiper>
+  </view>
 </view>

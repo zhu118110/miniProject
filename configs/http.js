@@ -1,4 +1,5 @@
-let baseUrl = "https://mobile-ms.uat.homecreditcfc.cn/mock/60d2afe44a9639001d427eed/mini"
+let baseUrl = "https://mobile-ms.uat.homecreditcfc.cn/mock/60d2afe44a9639001d427eed/mini";
+// let baseUrl = "https://res.abeim.cn";
 function get(url,params){
   return new Promise( (resolve,reject) =>{
     wx.request({

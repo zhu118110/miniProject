@@ -12,7 +12,7 @@
 		"minified": true,
 		"newFeature": false,
 		"coverView": true,
-		"nodeModules": false,
+		"nodeModules": true,
 		"autoAudits": false,
 		"showShadowRootInWxmlPanel": true,
 		"scopeDataCheck": false,
@@ -31,7 +31,7 @@
 		"userConfirmedUseCompilerModuleSwitch": false
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.14.4",
+	"libVersion": "2.10.4",
 	"appid": "wx99995433a3c923ef",
 	"projectname": "myMini",
 	"debugOptions": {
@@ -66,9 +66,37 @@
 			"current": -1,
 			"list": [
 				{
-					"id": -1,
+					"id": 0,
 					"name": "pages/component/aboutMy/aboutMy",
 					"pathName": "pages/component/aboutMy/aboutMy",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/component/login/login",
+					"pathName": "pages/component/login/login",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/component/index/index",
+					"pathName": "pages/component/index/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/component/login/login",
+					"pathName": "pages/component/login/login",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/component/search/search",
+					"pathName": "pages/component/search/search",
 					"scene": null
 				}
 			]

@@ -2,15 +2,15 @@
   "pages": [
     "pages/component/index/index",
     "pages/component/aboutMy/aboutMy",
-    "pages/publicPages/nav-bar/nav-bar",
-    "pages/publicPages/show-page/show-page"
+    "pages/component/login/login",
+    "pages/component/search/search",
+    "pages/component/webview/webview"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "微博",
-    "navigationBarTextStyle": "black",
-    "navigationStyle": "custom"
+    "navigationBarTextStyle": "black"
   },
   "tabBar": {
     "color": "#aaa",
@@ -27,5 +27,9 @@
     ]
   },
   "style": "v2",
-  "sitemapLocation": "sitemap.json"
+  "sitemapLocation": "sitemap.json",
+  "useExtendedLib": {
+    "kbone": true,
+    "weui": true
+  }
 }
