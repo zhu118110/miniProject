@@ -64,7 +64,7 @@ page{
 }
 .listItemLeft{
   display: flex;
-  
+  align-items: center;
 }
 .listItemLeft .num{
   width: 70rpx;

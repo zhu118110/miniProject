@@ -1,0 +1,203 @@
+/* pages/component/videos/video.wxss */
+.videoAres{
+  height: 100vh;
+  background-color: #000;
+  position: relative;
+}
+.videoBox{
+  width: 100%;
+  height: 100%;
+  font-size: 0;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.faceImg{
+  width: 100%;
+  height: 100%;
+}
+.faceImg image{
+  width: 100%;
+  height: 100%;
+}
+.videoBox video{
+  width: 100%;
+  height: 100%;
+}
+.videoBox .myIcon{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  padding: 0 20px;
+  background-color: rgba(00,00,00,0.5);
+}
+.videoBox .myIcon .iconfont{
+  font-size: 42rpx;
+  color: #fff;
+}
+.isNice{
+  color: #e17808;
+}
+.videoBox .myIcon .tips{
+  color: #fff;
+  font-size: 16px;
+}
+.videoInfor{
+  position: fixed;
+  bottom: 20px;
+  display: flex;
+  padding: 0 20px;
+  justify-content: space-between;
+  color: #fff;
+  width: 100%;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+.videoLeft {
+  align-self: flex-end;
+}
+.videoLeft .videoAuthor{
+  display: flex;
+  align-items: center;
+}
+.videoLeft .authorImg{
+  border-radius: 50%;
+  width: 70rpx;
+  height: 70rpx;
+  font-size: 0;
+  overflow: hidden;
+}
+.videoLeft .authorImg image{
+  width: 100%;
+  height: 100%;
+}
+.videoLeft .authorName{
+  margin: 0 20rpx;
+}
+.videoLeft .videoText{
+  font-size: 26rpx;
+  background-color: rgba(00,00,00,0.5);
+}
+.videoRight{
+  display: flex;
+  flex-direction: column;
+}
+.videoRight>view{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin: 10rpx 0;
+}
+.videoRight .iconfont{
+  font-size: 44rpx;
+}
+.videoRight .number{
+  font-size: 24rpx;
+}
+
+.sliderBox{
+  position: absolute;
+  bottom: -10px;
+  width: 100%;
+}
+
+
+.dialogClass .weui-dialog__hd{
+  padding: 5px 0;
+  display: flex;
+  justify-content: center;
+}
+.dialogClass .weui-dialog__hd .weui-dialog__title{
+  font-weight: 400;
+  font-size: 28rpx;
+}
+.dialogClass .weui-dialog{
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  transform: scale3d(1,1,1) translateY(0%);
+  border-radius: 10px 10px 0 0;
+}
+.dialogClass .weui-dialog .weui-dialog__bd{
+  margin: 0;
+  padding: 0 20rpx;
+}
+.dialogClass .weui-dialog__ft{
+  display: none;
+}
+.plScroll{
+  padding-bottom: 45px;
+  height: calc( 100% - 90rpx );
+}
+.dialogClass .plBox{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+.dialogClass .plLeft{
+  display: flex;
+  text-align: left;
+  font-size: 26rpx;
+}
+.dialogClass .plLeft .leftImg{
+  min-width: 25px;
+  max-width: 25px;
+  min-height: 25px;
+  max-height: 25px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 5px;
+}
+.dialogClass .plLeft .leftImg image{
+  width: 100%;
+  height: 100%;
+}
+.dialogClass .plLeft .leftContent .watcherText{
+  color: #000;
+}
+.plInput{
+  padding: 10rpx;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  border-top: 1rpx solid #eee;
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.plInput .plInpBox{
+  width: 80%;
+}
+
+.plInput input{
+  border-radius: 40px;
+  padding: 5px 10px;
+  background-color: rgb(243, 242, 242);
+  text-align: left;
+  color: #000;
+  font-size: 28rpx;
+}
+.plInput .plPlacehold{
+  text-align: left;
+  color: #bbb;
+  font-size: 28rpx;
+  padding: 5px;
+}
+
+.swiper-disabled {
+  position: relative;
+}
+
+.swiper-disabled::after {
+  position: absolute;
+  content: '';
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 330rpx;
+}

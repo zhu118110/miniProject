@@ -10,20 +10,28 @@ Page({
   data: {
     navHeight:"60",
     firstPageData:[],
-    isShow:false,  //触发下拉加载时loading动画是否显示
+    isShowTopLoading:false,  //触发下拉加载时loading动画是否显示
     isPullDown:false,  //禁止频繁下拉刷新
     tabsIndex:1,   //控制头部tab选中状态
     capsuleWidth:100,
-    capsuleRight:20
+    capsuleRight:20,
+    background:"#fff",
+    isShowDownLoading: false,
+    pageSize:1
   },
   // 点击切换头部tabs选中状态
   changeTabas(e){
     let tabIndex = e.currentTarget.dataset.index;
     this.setData({
       'tabsIndex': tabIndex
-    })
+    });
+    if(tabIndex == 2){
+      wx.navigateTo({
+        url: '../videos/video',
+      })
+    }
   },
-
+  
   // 点击搜索框时跳转到搜索页面
   tabSearch(){
     wx.navigateTo({
@@ -31,19 +39,34 @@ Page({
     })
   },
   // 刚进入页面时加载数据
-  initData(){
+  // @params flag:true时代表执行得是上拉刷新,数据从前面插入;默认false
+  initData(flag){
     http.get("/firstDataInfo",{})
     .then(res =>{
       if(res.statusCode == 200 && res.data.code == 1){
-        this.setData({
-          "firstPageData":res.data.data
-        })
+        if(!flag){
+          this.setData({
+            "firstPageData":res.data.data,
+            'isShowTopLoading':false,
+            'isPullDown':false
+          })
+        }else{
+          // 上拉加载时执行
+          let data = this.data.firstPageData;
+          data.push(...res.data.data)
+          this.setData({
+            "firstPageData":data,
+            'isShowDownLoading':false,
+            'isPullDown':false
+          })
+        }
+       
       }
     })
     .catch(err =>{
       wx.showToast({
-        title: '失败',
-        icon: 'error',
+        icon: 'none',
+        title: '请求失败',
         duration: 2000
       })
     })
@@ -54,59 +77,46 @@ Page({
       return false;
     }
     this.setData({
-      'isShow':true,
-      'isPullDown':true
+      'isShowTopLoading':true,
+      'isPullDown':true,
+      pageSize:1
     });
     this.initData();
-    let _this = this;
-    setTimeout(function () {
-      _this.setData({
-        'isShow':false,
-        'isPullDown':false
-      })
-    }, 2000)
+    
+  },
+  // 上拉加载
+  onReachBottom(){
+    if(this.data.isPullDown === true || this.data.pageSize == 4){
+      return false;
+    }
+    let pageSize = this.data.pageSize;
+    pageSize+=1
+    this.setData({
+      'isShowDownLoading':true,
+      'isPullDown':true,
+      pageSize:pageSize
+    });
+    this.initData(true)
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+   
     let rect = app.globalData.capsule;
-    console.log(rect)
     this.setData({
       navHeight:app.globalData.navHeight,
       capsuleWidth:rect.capsuleWidth, //胶囊宽度
       capsuleRight: rect.capsuleRight //胶囊与屏幕右边距离
     });
-    console.log( this.data.capsuleWidth, this.data.capsuleRight,)
     this.initData();
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-    
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-    
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-    
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-    
+  onShow:function(){
+    wx.setTabBarStyle({
+      color:"#000000",
+      backgroundColor:"#fff"
+    })
   },
 
   /**
@@ -115,13 +125,4 @@ Page({
   onPullDownRefresh: function () {
    this.pullDownData()
   },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-    
-  },
-
- 
 })

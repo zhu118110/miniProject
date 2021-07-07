@@ -1,7 +1,7 @@
 <!--pages/publicPages/header/header.wxml-->
 <view>
    <!-- 封装的公共的自定义头部组件, -->
-   <view class="navBox" style="height:{{ height }}px;background-color:#fff">
+   <view class="navBox" style="height:{{ height }}px;background-color:{{ background }}">
       <view style="height:{{ statusHeights }}px;"></view> <!-- 状态栏 -->
       <!-- width:calc( 100vw - 100vw  - {{ capsuleWidth - capsuleRight }}px );padding-top:{{ capsuleTop }}px; -->
       <view class="gapBox" style="height:{{ height - statusHeights }}px;">

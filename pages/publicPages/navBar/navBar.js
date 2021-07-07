@@ -8,7 +8,10 @@ Component({
     multipleSlots: true // 在组件定义时的选项中启用多slot支持
   },
   properties: {
-
+    background:{
+      value:"#fff",
+      type:String
+    }
   },
 
   /**
@@ -28,13 +31,18 @@ Component({
   methods: {
    
   },
+  observers:{
+    
+  },
   lifetimes:{
     attached(){
+      
       let statuHeight = wx.getSystemInfoSync().statusBarHeight;   //状态栏高度
       let rect = wx.getMenuButtonBoundingClientRect();
       // （胶囊距离顶部 - 状态栏高度*2） + 胶囊高度 + 状态栏高度
       let height = (rect.top - statuHeight)*2 + rect.height + statuHeight;
       this.setData({
+        // background:app.globalData.navBackground,
         statusHeights:statuHeight,
         height:height,
         capsuleTop: rect.top - statuHeight, //胶囊与状态栏距离
@@ -49,7 +57,6 @@ Component({
         capsuleTop : rect.top - statuHeight,   //胶囊与状态栏距离
         capsuleRight : rect.right   //胶囊与屏幕右边距离
       }
-      console.log(app.globalData)
     }
   }
 })

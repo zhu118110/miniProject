@@ -1,0 +1,52 @@
+<!--pages/component/detail/detail.wxml-->
+<!-- 详情页 -->
+<view>
+  <view class="headBox">
+    <block wx:if="{{ detailData.length > 0 }}" wx:for="{{ detailData }}" wx:for-item="item" wx:key="id">
+      <view class="header">
+        <view class="headLeft">
+          <view class="head-left-img">
+            <image src="{{ item.headImg }}"></image>
+          </view>
+          <view class="head-left-name">
+            {{ item.name }}
+          </view>
+        </view>
+        <view class="headRight">
+          +关注
+        </view>
+      </view>
+      <view class="article">
+        {{ item.article }}
+      </view>
+      <view class="imgList imgList-oneImg"  wx:if="{{item.imgArr.length==1}}">
+        <!-- 图片数量为1 -->
+        <view class="imgList-item" wx:for="{{ item.imgArr }}" wx:for-index="imgIndex" wx:for-item="imgItem" wx:key="imgIndex" bindtap="previeImg" data-index = "{{ imgIndex }}" >
+          <image src="{{ imgItem }}"></image>
+        </view> 
+      </view> 
+      <view class="imgList imgList-twoImg"  wx:if="{{item.imgArr.length==2 || item.imgArr.length==4}}">
+        <!-- 图片数量为2时或者4 -->
+        <view class="imgList-item" wx:for="{{ item.imgArr }}" wx:for-index="imgIndex" wx:for-item="imgItem" wx:key="imgIndex" bindtap="previeImg" data-index = "{{ imgIndex }}" >
+          <image src="{{ imgItem }}"></image>
+        </view> 
+      </view> 
+
+      <view class="imgList imgList-threeImg"  wx:if="{{item.imgArr.length==3}}">
+        <!-- 图片数量为3时 -->
+        <view class="imgList-item" wx:for="{{ item.imgArr }}" wx:for-index="imgIndex" wx:for-item="imgItem" wx:key="imgIndex" bindtap="previeImg" data-index = "{{ imgIndex }}" >
+          <image src="{{ imgItem }}"></image>
+        </view> 
+      </view> 
+    </block>
+  </view>
+
+  <view class="staticTitle">
+   <text>————</text> <text style="margin:0 10px">相关内容</text><text>————</text>
+  </view>
+
+  <view style="padding-bottom:10px">
+    <show-page pageData="{{referralData}}"></show-page>
+  </view>
+</view>
+

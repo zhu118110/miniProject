@@ -1,28 +1,50 @@
 <!--pages/publicPages/show-page/show-page.wxml-->
 <view class="container">
 	<block wx:for="{{ pageData }}" wx:for-index="index" wx:for-item="item" wx:key="id">
-	<view class="dataArea">
+	<view class="dataArea" bindtap="toDetail" data-index="{{ index }}">
 	
 			<view class="head">
 				<view class="headLeft">
 					<view class="headImg">
-						<image src="{{ item.headImg }}"></image>
+						<image  wx:if="{{item.headImg}}" src="{{ item.headImg }}"></image>
 					</view>
 					<view class="headName">{{ item.name }}</view>
 				</view>
-				<view class="headRight" bindtap="scanCode">+关注</view>
+				<view wx:if="{{ item.care == 0 }}" class="headRight" data-index="{{ index }}" catchtap="careAbout">+关注</view>
+				<view wx:else class="headRight active" data-index="{{ index }}" catchtap="careAbout">已关注</view>
 			</view>
 			<view class="content">
         <view class="article">
          <view>{{ item.article }}</view> 
         </view>
-        <view class="imgs {{ item.imgArr.length==1 ? 'imgOne' : (item.imgArr.length==2 ? 'imgTwo' : item.imgArr.length==3 ? 'imgThree' : item.imgArr.length==4 ? 'imgFour' :'')}}">
+        <view class="imgs imgsOne" wx:if="{{item.imgArr.length == 1}}">
+					<block wx:for="{{ item.imgArr }}" wx:for-index="imgsIndex" wx:for-item="imgItem" wx:key="id">
+						<view class="imgsItem">
+							<!-- <image class="{{ !item.isloding ? '' : 'defaultImg' }}" src="../../../imgs/load.gif"></image> -->
+							<!-- <image class="{{ item.islosed ? '' : 'defaultImg' }}" src="../../../imgs/lose2.jpg"></image> -->
+							<image class="realImg" bindload="imgLoad" binderror="imgError" data-imgIndex="{{ index }}" wx:if="{{imgItem}}" src="{{ imgItem }}" lazy-load="true"></image>
+						</view>
+					</block>
+				</view>
+				
+				<view class="imgs imgstwo" wx:if="{{item.imgArr.length == 2 || item.imgArr.length == 4}}">
 					<block wx:for="{{ item.imgArr }}" wx:for-index="imgsIndex" wx:for-item="imgItem" wx:key="imgsIndex">
-						<view>
-						 <image src="{{ imgItem }}" lazy-load="true"></image>
+						<view class="imgsItem">
+							<image class="realImg" bindload="imgLoad" binderror="imgError" data-imgIndex="{{ index }}" wx:if="{{imgItem}}" src="{{ imgItem }}" lazy-load="true"></image>
 						</view>
 					</block>
         </view>
+
+				<view class="imgs imgsThree" wx:if="{{item.imgArr.length == 3}}">
+					<block wx:for="{{ item.imgArr }}" wx:for-index="imgsIndex" wx:for-item="imgItem" wx:key="imgsIndex">
+						<view class="imgsItem">
+							<!-- <image hidden="{{ !item.isloding }}" src="../../../imgs/load.gif"></image>
+							<image hidden="{{ !item.islosed }}" src="../../../imgs/lose2.jpg"></image> -->
+							<image class="realImg" bindload="imgLoad" binderror="imgError" data-imgIndex="{{ index }}" wx:if="{{imgItem}}" src="{{ imgItem }}"></image>
+						</view>
+					</block>
+        </view>
+
 			</view>
 	
 

@@ -1,8 +1,8 @@
 <view>
   <view>
-  <nav-bar>
-      <view slot="left" class="title">登录</view>
-  </nav-bar>
+  <!-- <nav-bar>
+      <view slot="left" class="title">我的</view>
+  </nav-bar> -->
    <view class="header {{ isShow==false ?'isShow':'' }}">
     <view class="headerInfor">
      <!-- 左边头像 -->
@@ -26,7 +26,7 @@
   </view>
   <view class="tabHead">
     <view bindtap="changeTabs" class="{{ current == 0 ? 'active' :'' }}"  data-current="0">动态</view>
-    <view bindtap="changeTabs" class="{{ current == 1 ? 'active' :'' }}" data-current="1">微博</view>
+    <view bindtap="changeTabs" class="{{ current == 1 ? 'active' :'' }}" data-current="1">发布</view>
     <view bindtap="changeTabs" class="{{ current == 2 ? 'active' :'' }}" data-current="2">喜欢</view>
   </view>
   </view>
@@ -39,10 +39,16 @@
       </scroll-view>
      </swiper-item>
      <swiper-item>
-      <like bindmyLogin="myLogin"></like>
+      <like wx:if="{{ !isLogin }}"></like>
+      <scroll-view wx:else style=" height:{{ scrollHeight }}" scroll-top="{{scrollTop}}" scroll-y="{{ true }}" bindscroll="scrolling">
+        <show-page pageData="{{ pageData }}"></show-page>
+      </scroll-view>
      </swiper-item>
      <swiper-item>
-      <like bindmyLogin="myLogin"></like>
+      <like wx:if="{{ !isLogin }}"></like>
+      <scroll-view wx:if="{{ isLogin }}" style=" height:{{ scrollHeight }}" scroll-top="{{scrollTop}}" scroll-y="{{ true }}" bindscroll="scrolling">
+        <show-page pageData="{{ pageData }}"></show-page>
+      </scroll-view>
      </swiper-item>
     </swiper>
   </view>

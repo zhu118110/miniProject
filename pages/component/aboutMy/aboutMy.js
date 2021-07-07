@@ -1,5 +1,6 @@
 // pages/aboutMy.js
-let http = require("../../../configs/http")
+let http = require("../../../configs/http");
+const app = getApp();
 Page({
 
   /**
@@ -11,8 +12,10 @@ Page({
     isShow:true,
     userInfor:{},
     isLogin:false,
-    scrollHeight:'calc( 100vh - 360rpx  )',
+    scrollHeight:'calc( 100vh - 240rpx  )',
     scrollTop:0,
+    sendData:[],
+    likeData:[],
   },
 
 
@@ -21,31 +24,19 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+  
     this.dynamic()
     
   },
   // 点击立即登陆获取用户头像信息
   toLogin(){
     let _this=  this;
-    wx.getUserProfile({
-      desc: '用于完善会员资料', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
-      success: (res) => {
-        console.log(res)
-        _this.setData({
-         'userInfor.avatarUrl': res.userInfo.avatarUrl,
-         'userInfor.nickName': res.userInfo.nickName,
-       })
-      }
+    wx.navigateTo({
+      url: '../login/login',
     })
+   
   },
-  // 子组件点击登陆时从子组件中获取用户信息
-  myLogin(e){
-    console.log(e.detail.userInfor);
-    this.setData({
-      'userInfor.avatarUrl': e.detail.userInfor.userInfo.avatarUrl,
-      'userInfor.nickName': e.detail.userInfor.userInfo.nickName,
-    })
-  },
+  
 
   // 点击退出登录
   quitLogin(){
@@ -58,9 +49,16 @@ Page({
         if(res.confirm){
           _this.setData({
             'userInfor':{},
+            'isLogin':false,
+          });
+          wx.removeStorage({
+            key: 'isLogin',
+            success(){
+              wx.removeStorage({
+                key: 'userInfo',
+              })
+            },
           })
-        }else if (res.cancel) {
-          console.log('用户点击取消')
         }
       },
     })
@@ -113,11 +111,11 @@ Page({
     if(e.detail.scrollTop >= 400 ){
       this.setData({
         'isShow': false,
-        'scrollHeight':'calc( 100vh - 216rpx )',
+        'scrollHeight':'calc( 100vh - 100rpx )',
       })
     }else{
       this.setData({
-        'scrollHeight':'calc( 100vh - 360rpx  )',
+        'scrollHeight':'calc( 100vh - 240rpx  )',
         'isShow': true
       })
     }
@@ -134,7 +132,20 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    wx.setTabBarStyle({
+      color:"#000000",
+      backgroundColor:"#fff"
+    });
 
+    let isLogin = wx.getStorageSync('isLogin');
+    if(isLogin){
+      let userInfor = wx.getStorageSync('userInfo');
+      console.log(userInfor)
+      this.setData({
+        userInfor:userInfor,
+        isLogin: true
+      })
+    }
   },
 
 

@@ -1,0 +1,86 @@
+<!--pages/component/videos/video.wxml-->
+<view>
+  <view class="videoAres">
+    <swiper vertical="{{ true }}" style="height:100%" bindchange="swiperItemChange">
+    <block wx:for="{{ videoInfor }}" wx:key="index">
+      <swiper-item>
+        <view class="videoBox">
+          <view class="faceImg" bindtap="tapFaceImg" wx:if="{{ !item.isPlaying }}" data-index="{{ index }}"> 
+            <!-- 封面图 -->
+            <image wx:if="{{ item.img }}" src="{{ item.img }}"></image>
+          </view>
+          <video bindwaiting="videoWait" bindended="videoEnd" bindplay="videoPlay" bindpause="videoPaused" id="videoplayer{{index}}" data-index="{{ index }}" object-fit="fill" wx:if="item.link!==''" show-play-btn="{{false}}" controls="{{false}}" bindtimeupdate="videoUpdate" enable-play-gesture="{{true}}" src="{{ item.link }}"></video>
+          <view class="myIcon" hidden="{{ !item.isEnd }}" bindtap="againPlay" data-index = "{{ index }}">
+            <view class="iconfont icon-zhongxin"></view>
+          </view>
+          <view class="myIcon" hidden="{{ !item.isPaused}}" bindtap="continuePlay" data-index = "{{ index }}">
+            <view class="iconfont icon-bofang1"></view>
+          </view>
+        </view>
+        <view class="videoInfor">
+          <view class="videoLeft">
+            <!-- 作者头像和名称 -->
+            <view class="videoAuthor">
+              <view class="authorImg"><image wx:if="{{ item.avatar }}" src="{{ item.avatar }}"></image></view>
+              <view class="authorName">{{ item.autor }}</view>
+            </view>
+            <!-- 视频简介 -->
+            <view class="videoText">
+              {{ item.title }}
+            </view>
+          
+          </view>
+          <view class="videoRight">
+            <view bindtap="checkIsLogin" data-index="{{ index }}" data-num="{{ 1 }}">
+              <text class="iconfont icon-fenxiang01"></text>
+              <text class="number">1221</text>
+            </view>
+            <view bindtap="checkIsLogin" data-index="{{ index }}" data-num="{{ 2 }}">
+              <text class="iconfont icon-dianzan1 {{ item.nice ? 'isNice' : '' }}"></text>
+              <text class="number">1221</text>
+            </view>
+            <view catchtap="showDialog" data-index="{{ index }}">
+              <text class="iconfont icon-pinglun1"></text>
+              <text class="number">1221</text>
+            </view>
+          </view>
+        </view>
+        <view class="sliderBox">
+          <slider value="{{ item.sliderValue }}" bindchange="sliderChanging" bindchanging="slideChange" data-index="{{ index }}" block-size="10"  activeColor="#e17808"></slider>
+        </view>
+      </swiper-item>
+    </block>
+    </swiper>
+  </view>
+  
+  <view>
+        <mp-dialog ext-class="dialogClass" mask-closable="true" title="热门评论" show="{{ videoInfor[current].dialogShow }}" bindclose="closeDialog">
+          <scroll-view scroll-y="{{ true }}"  class="plScroll" show-scrollbar="false" enhanced="true">
+            <block  wx:for="{{videoComment[current].myData}}"  wx:for-item="comItem" wx:for-index="comIndex" wx:key="comIndex">
+            <view class="plBox">
+              <view class="plLeft">
+                <view class="leftImg">
+                  <image wx:if="{{ comItem.authorImg }}" src="{{ comItem.authorImg }}"></image>
+                </view>
+                <view class="leftContent">
+                  <view class="watcherName">{{ comItem.author}}{{ comIndex  }}</view>
+                  <view class="watcherText">{{ comItem.content }}</view>
+                </view>
+              </view>
+              <view class="plRight">
+                <text class="iconfont icon-dianzan1"></text>
+              </view>
+            </view>
+          </block>
+          </scroll-view>
+          <view class="plInput">
+            <view class="plInpBox">
+              <input type="text" bindinput="comInput" placeholder="说点什么...." value="{{ comVal }}" placeholder-class="plPlacehold" />
+            </view>
+            <view class="sendPl" bindtap="sendCommon" data-index="{{comIndex}}">
+              发送
+            </view>
+          </view>
+        </mp-dialog>
+      </view>
+</view>

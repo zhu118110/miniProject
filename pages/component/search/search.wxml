@@ -7,7 +7,7 @@
 					<mp-icon type="field" icon="back" color="black" size="{{12}}"></mp-icon>
 				</view>
 				<view class="search">
-					<input bindinput="insert" type="text" value="{{ inputVal }}" focus="true" auto-focus="true" placeholder-class="placeholder" placeholder="搜索"></input>
+					<input bindinput="insert"type="text" value="{{ inputVal }}" focus="true" auto-focus="true" placeholder-class="placeholder" placeholder="搜索"></input>
 					<text hidden="{{inputVal == ''}}" class="iconfont icon-qingchu my_icon" bindtap="clearValue"></text>
 				</view>
 			</view>
@@ -22,7 +22,11 @@
 				<block wx:if="{{ hotMode.length > 0 }}" wx:for="{{ hotMode }}" wx:key="id">
 					<view class="listItem" bindtap="choiceHotItem" data-url = "{{ item.url }}">
 						<view class="listItemLeft">
-							<view class="num {{ index <= 3 ? 'hotnum'  : '' }}">{{ index }}</view>
+						
+							<view class="num {{ index <= 3 ? 'hotnum'  : '' }}" wx:if="{{ index !==0 }}">{{ index }}</view>
+							<view class="num {{ index <= 3 ? 'hotnum'  : '' }}" wx:else>
+								<text class="iconfont icon-zhiding"></text>
+							</view>
 							<view class="title">{{ item.title }}</view>
 						</view>
 						<view class="listItemRight {{ item.hot > 8000000  ? 'listItemRightHot' : ''}}" wx:if="{{ item.hot > 8000000  }}">

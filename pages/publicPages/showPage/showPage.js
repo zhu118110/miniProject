@@ -24,20 +24,50 @@ Component({
    * 组件的方法列表
    */
   methods: {
+    careAbout(e){
+      let index = e.currentTarget.dataset.index;
+      // 没有登录则跳转到登录页，否则切换是否关注
+      let isLogin = wx.getStorageSync('isLogin')
+      if(!isLogin){
+        wx.navigateTo({
+          url: '../../component/login/login',
+        })
+      }else{
+        let data = this.data.pageData
+        data[index].care == 1 ? data[index].care = 0 : data[index].care = 1;
+        this.setData({
+          pageData: data
+        })
+      }
+    },
+    // 根据下标跳转到详情页
+    toDetail(e){
+      let index = e.currentTarget.dataset.index;
+      let _data = encodeURIComponent( JSON.stringify(this.data.pageData[index]) );
+      wx.navigateTo({
+        url: '../../component/detail/detail?data='+_data,
+      })
+    },
     open(){
       const query = wx.createSelectorQuery();
       query.select(".article").boundingClientRect();
       query.exec(res => {
-        
-        // const LineHeight = 30; // 行高
-        // const LineNum = res[0].height / LineHeight; // 行数
-        // if (LineNum < 5) {
-        //     this.setData({
-        //         lineNum: LineNum
-        //     });
-        // }
       });
-
+    },
+    // 图片加载完成
+    imgLoad(e){
+      let index= e.target.dataset.imgindex;
+      let data = this.data.pageData;
+      this.setData({
+        pageData: data
+      })
+    },
+    imgError(e){
+      let index= e.target.dataset.imgindex;
+      // this.setData({
+      //   [`pageData[${index}].isloding`]: false,
+      //   [`pageData[${index}].islosed`]: true
+      // })
     }
   },
   lifetimes: {
@@ -45,13 +75,13 @@ Component({
       this.setData({
         navHeight : app.globalData.navHeight,
       });
-      
     },
   },
 
   pageLifetimes:{
     show(){
-      this.open()
+      this.open();
+     
     }
   }
 

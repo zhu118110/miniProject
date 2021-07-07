@@ -27,9 +27,11 @@
 .search{
   display: flex;
   align-items: center;
+  width: 90%;
   /* margin-left: 20rpx; */
 }
 .search input{
+  width: 100%;
   background-color: rgb(245, 245, 245);
   border-radius: 40rpx;
   padding: 10rpx 20rpx;
@@ -40,4 +42,12 @@
 }
 .dataArea{
   margin-top: 20rpx;
+}
+
+.noData{
+  font-size: 26rpx;
+  color: #aaa;
+  text-align: center;
+  width: 100%;
+  padding: 10px 0;
 }

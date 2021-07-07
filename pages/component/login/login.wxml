@@ -1,5 +1,7 @@
 <!--pages/component/login/login.wxml-->
 <view>
   <!-- <nav-bar></nav-bar> -->
-  
+  <view class="box">
+    <button type="primary" bindtap="getUserInfor">微信一键登录</button>
+  </view>
 </view>

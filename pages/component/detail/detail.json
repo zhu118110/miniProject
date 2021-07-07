@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "show-page":"../../publicPages/showPage/showPage"
+  },
+  "navigationBarTitleText": "正文"
+}

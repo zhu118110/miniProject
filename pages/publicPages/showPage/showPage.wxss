@@ -41,6 +41,10 @@
   color: #e17808;
   font-size:22rpx
 }
+.active{
+  color: #fff;
+  background-color: #e17808;
+}
 .article{
   text-overflow: ellipsis;
   overflow: hidden;
@@ -59,43 +63,44 @@
 .imgs{
   width: 100%;
   display: flex;
-}
-.imgs image{
-  width: 100%;
-  height: 100%;
-}
-
-.imgOne view{
-  width: 100%;
-  height: 420rpx;
-}
-.imgOne image{
-  width: 100%;
-  height: 100%;
-}
-
-.imgTwo {
-  justify-content: space-between;
-}
-.imgTwo view{
-  width:50%;
-  height: 420rpx;
-}
-
-.imgThree{
-  justify-content: space-around;
-}
-.imgThree view{
-  /* width:33.3333%; */
-  flex: 1;
-  height: 300rpx;
-}
-
-.imgFour{
   flex-wrap: wrap;
+}
+.imgsItem image{
+  width: 100%;
+  height: 100%;
+}
+/* 一张图片 */
+.imgsOne .imgsItem{
+  width: 100%;
+  height: 420rpx;
+}
+
+/* 2张或者4张图片 */
+.imgstwo {
   justify-content: space-between;
 }
-.imgFour>view{
-  width:50%;
-  height: 240rpx;
+.imgstwo .imgsItem{
+  width: calc( 100vw - (100vw / 2)  - 12px );
+  height: 150px;
 }
+
+.imgstwo .imgsItem:nth-last-child(-n+2){
+  margin-top: 5px;
+}
+.imgstwo .imgsItem:nth-child(-n+2){
+  margin-top: 0px;
+}
+/* 3张图片 */
+.imgsThree{
+  justify-content: space-between;
+}
+.imgsThree .imgsItem{
+  width: calc( 100vw / 3  - 9px );
+  height: 130px;
+}
+
+.imgs .defaultImg{
+  width: 0;
+  height: 0;
+}
+

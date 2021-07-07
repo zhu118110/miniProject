@@ -1,1 +1,12 @@
 /* pages/component/login/login.wxss */
+page{
+  background-color: #fff;
+}
+.box{
+  height: 100vh;
+  display: flex;
+  align-items: center;
+}
+.box button{
+  height: 40px;
+}

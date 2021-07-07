@@ -1,0 +1,90 @@
+/* pages/component/detail/detail.wxss */
+page{
+  background-color: #fff;
+}
+.headBox{
+  padding: 20rpx;
+}
+.header{
+  display: flex;
+  justify-content: space-between;
+}
+.headLeft{
+  display: flex;
+  align-items: center;
+}
+.head-left-img{
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  overflow: hidden;
+  font-size: 0;
+  margin-right: 10px;
+}
+.head-left-img image{
+  width: 100%;
+  height: 100%;
+}
+.head-left-name{
+  font-size: 30rpx;
+}
+.headRight{
+  border:1rpx solid #e17808;
+  padding: 4rpx 20rpx;
+  border-radius: 40rpx;
+  color: #e17808;
+  font-size:22rpx;
+  align-self: center;
+}
+
+.article{
+  margin: 10px 0;
+  font-size: 26rpx;
+}
+
+.imgList{
+  display: flex;
+  flex-wrap: wrap;
+}
+.imgList-oneImg .imgList-item{
+  width:100%;
+  height: 420rpx;
+}
+/* 两张图片或者4张时 */
+.imgList-twoImg{
+  justify-content: space-between;
+}
+.imgList-twoImg .imgList-item{
+  width: calc( 100vw - (100vw / 2)  - 12px );
+  height: 150px;
+}
+.imgList-twoImg .imgList-item:nth-last-child(-n+2){
+  margin-top: 5px;
+}
+.imgList-twoImg .imgList-item:nth-child(-n+2){
+  margin-top: 0px;
+}
+/* 3张图片 */
+.imgList-threeImg{
+  justify-content: space-between;
+}
+.imgList-threeImg .imgList-item{
+  width: calc( 100vw / 3  - 9px );
+  height: 130px;
+}
+.imgList .imgList-item image{
+  width: 100%;
+  height: 100%;
+}
+
+
+.staticTitle{
+  width: 100%;
+  background-color: #eee;
+  color: #aaa;
+  display: flex;
+  align-items: center;
+  font-size: 26rpx;
+  justify-content: center;
+  padding: 15px 0;
+}

@@ -5,5 +5,5 @@
     "mp-icon": "weui-miniprogram/icon/icon",
     "show-page":"../../publicPages/showPage/showPage"
   },
-  "navigationStyle": "custom"
+  "navigationBarTitleText": "我的"
 }

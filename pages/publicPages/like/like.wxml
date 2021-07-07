@@ -1,9 +1,9 @@
 <!--我得页面下 未登录时 喜欢和微博tab内容-->
 <view class="likeBox">
   <view class="tips">
-    登陆后可以查看发布和收藏得作品  
+    请先登录
   </view>
-  <view class="login" bindtap="login">
+  <!-- <view class="login" bindtap="login">
     立即登录
-  </view>
+  </view> -->
 </view>

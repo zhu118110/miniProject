@@ -1,16 +1,17 @@
 <!--index.wxml-->
 <view class="container">
-  <nav-bar class="navBar">
+  <nav-bar class="navBar" background="{{ background }}">
     <view slot="left" class="navBarLeft" style="width:calc( 100vw - 100vw - {{ capsuleWidth - capsuleRight }}px )">
-      <view class="article {{ tabsIndex == 1 ? 'active' : '' }}" bindtap="changeTabas" data-index="1">文章</view>
-      <view class="video  {{ tabsIndex == 2 ? 'active' : '' }}" bindtap="changeTabas" data-index="2">视频</view>
+     
       <view class="search" bindtap="tabSearch">
-        <input type="text" placeholder-class="placeholder" placeholder="搜索"></input>
+        <input type="text"  disabled="{{ true }}"  placeholder-class="placeholder" placeholder="搜索"></input>
       </view>
     </view>
   </nav-bar>
-  <view class="dataArea"  style="margin-top:{{ navHeight+10 }}px">
-    <mp-loading show="{{ isShow }}" type="circle" tips="加载中"></mp-loading>
+  <view class="dataArea"  style="margin-top:{{ navHeight+10 }}px" hidden="{{tabsIndex == 2}}">
+    <mp-loading show="{{ isShowTopLoading }}" type="circle" tips="加载中" hidden="{{tabsIndex == 2}}"></mp-loading>
     <show-page pageData="{{firstPageData}}"></show-page>
   </view>
+  <mp-loading show="{{ isShowDownLoading }}" type="circle" tips="加载中" hidden="{{tabsIndex == 2}}"></mp-loading>
+  <view class="noData" wx:if="{{ firstPageData.length >= 40 }}"> 没有数据了 - - </view>
 </view>

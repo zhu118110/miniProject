@@ -1,4 +1,6 @@
 // pages/component/login/login.js
+const app = getApp();
+const http = require("../../../configs/api")
 Page({
 
   /**
@@ -7,7 +9,68 @@ Page({
   data: {
 
   },
-
+  getUserInfor(e){
+    wx.getUserProfile({
+      desc: '获取您的头像信息',
+      success:function(res){
+        console.log(res)
+        wx.setStorageSync('isLogin',true);
+        wx.setStorageSync('userInfo',res.userInfo);
+        app.globalData.isLogin = true;
+        app.globalData.userInfo = res.userInfo;
+        let pages = getCurrentPages();
+        var prevPage = pages[pages.length - 2]; // 上一个页面
+        prevPage.setData({
+          isLogin:true
+        });
+        wx.navigateBack({
+          delta: 1,
+        })
+      },
+      fail:function(err){
+        if(err.errMsg){
+          wx.showToast({
+            title: '您已拒绝授权获取信息',
+            icon:"none",
+          })
+          setTimeout(() => {
+            wx.navigateBack({
+              delta: 1,
+            })
+          }, 1800);
+        }
+      }
+    })
+    
+  },
+  getavtor(){
+    wx.getUserProfile({
+      desc: '获取您的头像信息',
+      success:function(res){
+        console.log(res)
+        wx.setStorageSync('isLogin',true);
+        wx.setStorageSync('userInfo',res.userInfo);
+        app.globalData.isLogin = true;
+        app.globalData.userInfo = res.userInfo;
+        // let pages = getCurrentPages();
+        // var prevPage = pages[pages.length - 2]; // 上一个页面
+        // prevPage.setData({
+        //   isLogin:true
+        // });
+        // wx.navigateBack({
+        //   delta: 1,
+        // })
+      },
+      fail:function(err){
+        if(err.errMsg){
+          wx.showToast({
+            title: '您已拒绝授权获取信息',
+            icon:"none"
+          })
+        }
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
