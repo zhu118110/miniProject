@@ -31,7 +31,15 @@
     "userConfirmedUseCompilerModuleSwitch": false,
     "useMultiFrameRuntime": true,
     "useApiHook": true,
-    "useApiHostProcess": false
+    "useApiHostProcess": false,
+    "packNpmManually": true,
+    "packNpmRelationList": [
+      {
+        "packageJsonPath": "./package.json",
+        "miniprogramNpmDistDir": "./"
+      }
+    ]
+    
   },
   "compileType": "miniprogram",
   "libVersion": "2.12.3",

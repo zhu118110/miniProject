@@ -11,7 +11,8 @@ Page({
     navHeight:"60",
     firstPageData:[],
     isShowTopLoading:false,  //触发下拉加载时loading动画是否显示
-    isPullDown:false,  //禁止频繁下拉刷新
+    isPullDown:false,  //控制下拉刷新
+    off:true,
     tabsIndex:1,   //控制头部tab选中状态
     capsuleWidth:100,
     capsuleRight:20,
@@ -39,28 +40,33 @@ Page({
     })
   },
   // 刚进入页面时加载数据
-  // @params flag:true时代表执行得是上拉刷新,数据从前面插入;默认false
-  initData(flag){
+  // @params flag:0时代表执行得是上拉加载,数据从前面插入;默认false
+  initData(flag=0){
     http.get("/firstDataInfo",{})
     .then(res =>{
       if(res.statusCode == 200 && res.data.code == 1){
-        if(!flag){
-          this.setData({
-            "firstPageData":res.data.data,
-            'isShowTopLoading':false,
-            'isPullDown':false
-          })
-        }else{
-          // 上拉加载时执行
-          let data = this.data.firstPageData;
-          data.push(...res.data.data)
-          this.setData({
-            "firstPageData":data,
-            'isShowDownLoading':false,
-            'isPullDown':false
-          })
+        switch(flag){
+          case 0:
+            console.log("页面刚展示")
+            this.setData({
+              "firstPageData":res.data.data,
+            });
+          case 1 :  //下拉刷新
+          console.log("下拉刷新")
+            this.setData({
+              'firstPageData':[],
+              "firstPageData":res.data.data,
+              "isShowTopLoading":false,
+            });
+          case 2 :  //上拉加载
+          console.log("上拉加载")
+            let data = this.data.firstPageData;
+            data.push(...res.data.data)
+            this.setData({
+              "firstPageData":data,
+              'isShowDownLoading':false,
+            })
         }
-       
       }
     })
     .catch(err =>{
@@ -71,38 +77,59 @@ Page({
       })
     })
   },
-  // 下拉获取更多数据
-  pullDownData(){
-    if(this.data.isPullDown === true){
-      return false;
+
+  startRefresh(){
+    if(this.data.isPullDown == false){
+      this.setData({
+        "isPullDown":true,
+      });
     }
-    this.setData({
-      'isShowTopLoading':true,
-      'isPullDown':true,
-      pageSize:1
-    });
-    this.initData();
-    
   },
-  // 上拉加载
-  onReachBottom(){
-    if(this.data.isPullDown === true || this.data.pageSize == 4){
+  // 下拉获取更多数据
+  scrollRefresh(){
+    if(this.data.isPullDown === false){
+      return false;
+    }else{
+      this.setData({
+        'isShowTopLoading':true,
+        "isPullDown":false,
+        pageSize:1,
+      });
+      setTimeout(() => {
+        this.initData(1);
+      }, 2000);
+    }
+    
+   
+  },
+  
+
+  // 滚动到底部加载
+  toScrollLower(){
+    if(this.data.isShowDownLoading == true || this.data.pageSize == 4){
       return false;
     }
     let pageSize = this.data.pageSize;
     pageSize+=1
     this.setData({
       'isShowDownLoading':true,
-      'isPullDown':true,
       pageSize:pageSize
     });
-    this.initData(true)
+    this.initData(2)
+    // setTimeout(() => {
+      
+    // }, 2000);
+    
+  },
+  scrolling(){
+    // setTimeout(() => {
+    //   this.test()
+    // }, 1000);
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-   
     let rect = app.globalData.capsule;
     this.setData({
       navHeight:app.globalData.navHeight,
@@ -112,13 +139,13 @@ Page({
     this.initData();
   },
 
-  onShow:function(){
+  onReady:function(){
     wx.setTabBarStyle({
       color:"#000000",
       backgroundColor:"#fff"
     })
   },
-
+  
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */

@@ -1,5 +1,6 @@
 /**app.wxss**/
 @import  "utils/font.wxss";
+/* @import 'node_modules/@vant/weapp/common/index.wxss'; */
 page{
   background-color: #eee;
 }

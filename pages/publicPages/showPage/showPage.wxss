@@ -65,10 +65,16 @@
   display: flex;
   flex-wrap: wrap;
 }
+.showImgs{
+  opacity: 1;
+}
 .imgsItem image{
   width: 100%;
   height: 100%;
+  /* opacity: 0;
+  transition: all 1s; */
 }
+
 /* 一张图片 */
 .imgsOne .imgsItem{
   width: 100%;

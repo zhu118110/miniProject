@@ -1,17 +1,28 @@
 <!--index.wxml-->
 <view class="container">
-  <nav-bar class="navBar" background="{{ background }}">
+  <nav-bar class="navBar" background="{{ background }}" style="position:fiexd;z-index:1000">
     <view slot="left" class="navBarLeft" style="width:calc( 100vw - 100vw - {{ capsuleWidth - capsuleRight }}px )">
-     
       <view class="search" bindtap="tabSearch">
         <input type="text"  disabled="{{ true }}"  placeholder-class="placeholder" placeholder="搜索"></input>
       </view>
     </view>
   </nav-bar>
   <view class="dataArea"  style="margin-top:{{ navHeight+10 }}px" hidden="{{tabsIndex == 2}}">
-    <mp-loading show="{{ isShowTopLoading }}" type="circle" tips="加载中" hidden="{{tabsIndex == 2}}"></mp-loading>
-    <show-page pageData="{{firstPageData}}"></show-page>
+    <scroll-view 
+      scroll-y="true" 
+      bindscrolltolower="toScrollLower" 
+      refresher-default-style="none" 
+      refresher-enabled="true" 
+      refresher-triggered="{{ isPullDown }}" 
+      bindrefresherrefresh="scrollRefresh" 
+      bindrefresherpulling="startRefresh"
+      bindscroll="scrolling"
+      style="height:calc( 100vh - 70px )">
+      <mp-loading show="{{ isShowTopLoading }}" type="circle" tips="加载中" hidden="{{tabsIndex == 2}}"></mp-loading>
+        <show-page pageData="{{firstPageData}}"></show-page>
+      <mp-loading show="{{ isShowDownLoading }}" type="circle" tips="加载中" hidden="{{tabsIndex == 2}}"></mp-loading>
+      <view class="noData" wx:if="{{ firstPageData.length >= 40 }}"> 没有数据了 - - </view>
+    </scroll-view>
   </view>
-  <mp-loading show="{{ isShowDownLoading }}" type="circle" tips="加载中" hidden="{{tabsIndex == 2}}"></mp-loading>
-  <view class="noData" wx:if="{{ firstPageData.length >= 40 }}"> 没有数据了 - - </view>
+  
 </view>

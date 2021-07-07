@@ -5,6 +5,5 @@
     "mp-loading": "weui-miniprogram/loading/loading"
   },
   "navigationStyle": "custom",
-  "enablePullDownRefresh":true,
   "onReachBottomDistance":20
 }
