@@ -74,7 +74,9 @@ Page({
         icon: 'none',
         title: '请求失败',
         duration: 2000
-      })
+      }); this.setData({
+        "isShowTopLoading":false,
+      });
     })
   },
 
@@ -139,7 +141,7 @@ Page({
     this.initData();
   },
 
-  onReady:function(){
+  onShow:function(){
     wx.setTabBarStyle({
       color:"#000000",
       backgroundColor:"#fff"

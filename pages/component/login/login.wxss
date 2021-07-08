@@ -9,4 +9,5 @@ page{
 }
 .box button{
   height: 40px;
+  line-height: 40PX;
 }
