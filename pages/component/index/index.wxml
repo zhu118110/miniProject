@@ -7,6 +7,7 @@
       </view>
     </view>
   </nav-bar>
+ 
   <view class="dataArea"  style="margin-top:{{ navHeight+10 }}px" hidden="{{tabsIndex == 2}}">
     <scroll-view 
       scroll-y="true" 
@@ -20,6 +21,9 @@
       style="height:calc( 100vh - 70px )">
       <mp-loading show="{{ isShowTopLoading }}" type="circle" tips="加载中" hidden="{{tabsIndex == 2}}"></mp-loading>
         <show-page pageData="{{firstPageData}}"></show-page>
+        <!-- <view style="height:114px;background-color:red">
+        sadasdadasdsa
+      </view> -->
       <mp-loading show="{{ isShowDownLoading }}" type="circle" tips="加载中" hidden="{{tabsIndex == 2}}"></mp-loading>
       <view class="noData" wx:if="{{ firstPageData.length >= 40 }}"> 没有数据了 - - </view>
     </scroll-view>

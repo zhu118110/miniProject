@@ -34,12 +34,6 @@
           "scene": null
         },
         {
-          "name": "pages/component/videos/video",
-          "pathName": "pages/component/videos/video",
-          "query": "",
-          "scene": null
-        },
-        {
           "id": -1,
           "name": "pages/component/search/search",
           "pathName": "pages/component/search/search",

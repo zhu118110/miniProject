@@ -4,7 +4,7 @@
     "pages/component/aboutMy/aboutMy",
     "pages/component/login/login",
     "pages/component/search/search",
-    "pages/component/videos/video",
+    "pages/component/myvideos/video",
     "pages/component/detail/detail"
   ],
   "window": {
@@ -22,7 +22,7 @@
         "text": "主页"
       },
       {
-        "pagePath": "pages/component/videos/video",
+        "pagePath": "pages/component/myvideos/video",
         "text": "视频"
       },
       {

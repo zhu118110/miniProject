@@ -4,16 +4,27 @@
     <swiper vertical="{{ true }}" style="height:100%" bindchange="swiperItemChange">
     <block wx:for="{{ videoInfor }}" wx:key="index">
       <swiper-item>
-        <view class="videoBox">
-          <view class="faceImg" bindtap="tapFaceImg" wx:if="{{ !item.isPlaying }}" data-index="{{ index }}"> 
-            <!-- 封面图 -->
+        <view class="videoBox" catchtap="videoPlayPause" data-index="{{ index }}" >
+        <!-- 封面图 -->
+          <!-- <view class="faceImg" bindtap="tapFaceImg"hidden="{{ item.isPlaying }}" data-index="{{ index }}"> 
+            
             <image wx:if="{{ item.img }}" src="{{ item.img }}"></image>
-          </view>
-          <video bindwaiting="videoWait" bindended="videoEnd" bindplay="videoPlay" bindpause="videoPaused" id="videoplayer{{index}}" data-index="{{ index }}" object-fit="fill" wx:if="item.link!==''" show-play-btn="{{false}}" controls="{{false}}" bindtimeupdate="videoUpdate" enable-play-gesture="{{true}}" src="{{ item.link }}"></video>
-          <view class="myIcon" hidden="{{ !item.isEnd }}" bindtap="againPlay" data-index = "{{ index }}">
-            <view class="iconfont icon-zhongxin"></view>
-          </view>
-          <view class="myIcon" hidden="{{ !item.isPaused}}" bindtap="continuePlay" data-index = "{{ index }}">
+          </view> -->
+          <video 
+            wx:if="{{item.link!==''}}" 
+            bindwaiting="videoWait" 
+            bindended="videoEnd" 
+            bindplay="videoPlay" 
+            show-center-play-btn="{{ false }}"
+            id="videoplayer{{index}}" 
+            custom-cache="{{false}}"
+            data-index="{{ index }}" 
+            object-fit="fill" 
+            show-play-btn="{{false}}"
+            controls="{{false}}"
+            enable-play-gesture="{{false}}" 
+            src="{{ item.link }}"></video>
+          <view class="myIcon" hidden="{{ !item.isPaused}}" catchtap="continuePlay" data-index = "{{ index }}">
             <view class="iconfont icon-bofang1"></view>
           </view>
         </view>
@@ -45,16 +56,16 @@
             </view>
           </view>
         </view>
-        <view class="sliderBox">
+        <!-- <view class="sliderBox">
           <slider value="{{ item.sliderValue }}" bindchange="sliderChanging" bindchanging="slideChange" data-index="{{ index }}" block-size="10"  activeColor="#e17808"></slider>
-        </view>
+        </view> -->
       </swiper-item>
     </block>
     </swiper>
   </view>
   
   <view>
-        <mp-dialog ext-class="dialogClass" mask-closable="true" title="热门评论" show="{{ videoInfor[current].dialogShow }}" bindclose="closeDialog">
+        <mp-dialog ext-class="dialogClass" mask="false" mask-closable="true" title="热门评论" show="{{ videoInfor[current].dialogShow }}" bindclose="closeDialog">
           <scroll-view scroll-y="{{ true }}"  class="plScroll" show-scrollbar="false" enhanced="true">
             <block  wx:for="{{videoComment[current].myData}}"  wx:for-item="comItem" wx:for-index="comIndex" wx:key="comIndex">
             <view class="plBox">

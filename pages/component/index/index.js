@@ -132,6 +132,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    let infor = wx.getSystemInfoSync();  
+    let MenuButton = wx.getMenuButtonBoundingClientRect();
+    let tabbarHeight = (infor.screenHeight -  infor.windowHeight -  infor.statusBarHeight) * infor.pixelRatio
+    console.log(infor)
+    console.log(tabbarHeight)
+
+
+
     let rect = app.globalData.capsule;
     this.setData({
       navHeight:app.globalData.navHeight,

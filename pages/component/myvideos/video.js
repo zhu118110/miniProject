@@ -7,8 +7,6 @@ Page({
    */
   data: {
     videoInfor: null, //存放视频信息
-    sliderValue: 0,
-    isChange: false,
     current: 0,
     videoplayer: {},
     videoComment: {},
@@ -17,7 +15,8 @@ Page({
   },
   swiperItemChange(e) {
     let cur = e.detail.current;
-    this.data.videoplayer['videoplayer' + this.data.current].pause()
+    this.data.videoplayer['videoplayer' + this.data.current].pause();
+    this.data.videoplayer['videoplayer' + cur].play();
     this.setData({
       current: cur
     })
@@ -25,6 +24,9 @@ Page({
   getVideo() {
     let _this = this;
     let videoArr = [];
+    wx.showLoading({
+      title: '加载中',
+    })
     for (let i = 0; i <= 5; i++) {
       wx.request({
         url: 'https://api.iyk0.com/weishi/',
@@ -34,18 +36,19 @@ Page({
           if (res.statusCode == 200 && res.data !== null) {
             videoArr.push(res.data)
             videoArr.forEach((val, index) => {
-              val.isChange = false;
-              val.sliderValue = 0;
               val.isPlaying = false; //是否是播放状态
               val.isPaused = false; //是否是暂停状态
-              val.isEnd = false; //是否播放结束
               val.dialogShow = false; //是否出现评论列表
-              val.nice = false,  //是否点赞
+              val.nice = false; //是否点赞
               _this.data.videoplayer['videoplayer' + index] = wx.createVideoContext('videoplayer' + index);
             })
-
             _this.setData({
               'videoInfor': videoArr
+            })
+            _this.data.videoplayer['videoplayer' + _this.data.current].play();
+            _this.setData({
+              [`videoInfor[${_this.data.current}].isPlaying`]: true,
+              [`videoInfor[${_this.data.current}].isPaused`]: false,
             })
           }
           wx.hideLoading();
@@ -68,68 +71,59 @@ Page({
           })
         }
       })
+      .catch(err =>{
+        wx.showToast({
+          title: '加载失败',
+        })
+      })
   },
-  // 点击封面图根据下标让视频播放
-  tapFaceImg(e){
-    let index = e.currentTarget.dataset.index;
-    this.data.videoplayer['videoplayer' + index].play();
-    let videoInfor = this.data.videoInfor;
-    videoInfor[index].isPlaying = true;
-    this.setData({
-      'videoInfor': videoInfor
-    })
-  },
-  // 视频播放时根据播放时长改变进度条位置
-  videoUpdate(e) {
-    let index = e.currentTarget.dataset.index;
-    let sliderValue = e.detail.currentTime / e.detail.duration * 100;
-    let videoInfor = this.data.videoInfor;
-    videoInfor[index].sliderValue = sliderValue;
-    videoInfor[index].duration = e.detail.duration;
-    this.setData({
-      'videoInfor': videoInfor
-    })
-  },
-  // 视频播放结束时触发,出现重新播放按钮
+  // 视频播放结束时触发
   videoEnd(e) {
     let index = e.currentTarget.dataset.index;
-    this.setData({
-      [`videoInfor[${index}].isEnd`]: true,
-      [`videoInfor[${index}].isPaused`]: false
-    })
-  },
-  // 点击重新播放按钮时根据下标让视频重新播放
-  againPlay(e) {
-    let index = e.currentTarget.dataset.index;
+    this.data.videoplayer['videoplayer' + index].seek(0.001)
     this.data.videoplayer['videoplayer' + index].play();
     this.setData({
-      [`videoInfor[${index}].isEnd`]: false
+      [`videoInfor[${index}].isPlaying`]: true,
+      [`videoInfor[${index}].isPaused`]: false,
     })
   },
-  // 视频暂停播放时出现暂停按钮
-  videoPaused(e) {
+  videoPlayPause(e){
     let index = e.currentTarget.dataset.index;
-    this.setData({
-      [`videoInfor[${index}].isPaused`]: true
-    })
+    if(this.data.videoInfor[index].isPlaying == true){
+        this.data.videoplayer['videoplayer' + index].pause();
+        this.setData({
+          [`videoInfor[${index}].isPlaying`]: false,
+          [`videoInfor[${index}].isPaused`]: true,
+        })
+    }else{
+      this.data.videoplayer['videoplayer' + index].play();
+      this.setData({
+        [`videoInfor[${index}].isPlaying`]: true,
+        [`videoInfor[${index}].isPaused`]: false,
+      })
+    }
+    
   },
+
   // 点击暂停播放按钮让视频播放
   continuePlay(e) {
     let index = e.currentTarget.dataset.index;
     this.data.videoplayer['videoplayer' + index].play();
     this.setData({
+      [`videoInfor[${index}].isPlaying`]: true,
       [`videoInfor[${index}].isPaused`]: false
     })
   },
   videoPlay(e) {
     let index = e.currentTarget.dataset.index;
     this.setData({
+      [`videoInfor[${index}].isPlaying`]: true,
       [`videoInfor[${index}].isPaused`]: false,
-      [`videoInfor[${index}].isEnd`]: false
-    })
+    });
+    // console.log("222",this.data.videoInfor[index].isPlaying);
   },
   videoWait(e) {
-    console.log(e.currentTarget.dataset.index)
+    // console.log(e.currentTarget.dataset.index)
   },
   // 点击分享:1或者点赞:2按钮时判断是否登录
   checkIsLogin(e){
@@ -202,30 +196,13 @@ Page({
       },
     })
   },
-  // 拖动过程中触发
-  sliderChanging() {
-    // this.setData({
-    //   'isChange': false //拖拽过程中，不允许更新进度条
-    // })
-  },
-  // 进度条拖动完毕时触发
-  slideChange(e) {
-    let index = e.currentTarget.dataset.index;
-    this.data.videoplayer['videoplayer' + index].seek(e.detail.value / 100 * this.data.videoInfor[index].duration); //完成拖动后，计算对应时间并跳转到指定位置
-    let videoInfor = this.data.videoInfor;
-    videoInfor[index].sliderValue = e.detail.value;
-    videoInfor[index].isChange = true;
-    this.setData({
-      'videoInfor': videoInfor,
-    })
-  },
+
+  
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.showLoading({
-      title: '加载中',
-    })
+    
     this.getVideo()
   },
 

@@ -15,6 +15,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    let infor = wx.getSystemInfoSync();  
+    let MenuButton = wx.getMenuButtonBoundingClientRect();
+    console.log(infor)
+    console.log(infor.screenHeight -  infor.windowHeight)
+
     // 获取要展示得详细数据
     let data = JSON.parse( decodeURIComponent(options.data) );
     let arr = [];
